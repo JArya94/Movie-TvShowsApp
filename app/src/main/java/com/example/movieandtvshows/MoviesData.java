@@ -1,0 +1,99 @@
+package com.example.movieandtvshows;
+
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import com.google.gson.annotations.SerializedName;
+
+public class MoviesData implements Parcelable {
+
+    private String title;
+    private String poster_path;
+    @SerializedName("release_date")
+    private String release_Date;
+    @SerializedName("id")
+    private int movie_id;
+    private float vote_average;
+    @SerializedName("overview")
+    private String movie_overview;
+    //@SerializedName("runtime")
+    private int runtime;
+
+    public MoviesData(String title, String poster_path, String release_Date, int movie_id, float vote_average, String movie_overview, int runtime) {
+        this.title = title;
+        this.poster_path = poster_path;
+        this.release_Date = release_Date;
+        this.movie_id = movie_id;
+        this.vote_average = vote_average;
+        this.movie_overview = movie_overview;
+        this.runtime = runtime;
+    }
+
+    protected MoviesData(Parcel in) {
+        title = in.readString();
+        poster_path = in.readString();
+        release_Date = in.readString();
+        movie_id = in.readInt();
+        vote_average = in.readFloat();
+        movie_overview = in.readString();
+        runtime = in.readInt();
+    }
+
+    public static final Creator<MoviesData> CREATOR = new Creator<MoviesData>() {
+        @Override
+        public MoviesData createFromParcel(Parcel in) {
+            return new MoviesData(in);
+        }
+
+        @Override
+        public MoviesData[] newArray(int size) {
+            return new MoviesData[size];
+        }
+    };
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getPoster_path() {
+        return poster_path;
+    }
+
+    public String getRelease_Date() {
+        return release_Date;
+    }
+
+    public int getMovie_id() {
+        return movie_id;
+    }
+
+    public float getVote_average() {
+        return vote_average;
+    }
+
+    public String getMovie_overview() {
+        return movie_overview;
+    }
+
+    public int getRuntime() {
+        return runtime;
+    }
+
+
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(title);
+        dest.writeString(poster_path);
+        dest.writeString(release_Date);
+        dest.writeInt(movie_id);
+        dest.writeFloat(vote_average);
+        dest.writeString(movie_overview);
+        dest.writeInt(runtime);
+    }
+}
